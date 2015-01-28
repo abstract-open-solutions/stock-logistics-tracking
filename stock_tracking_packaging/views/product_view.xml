@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id='view_product_form_packaging_ok' model='ir.ui.view'>
+            <field name="name">product.product.packaging_ok.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <label for="sale_ok" position="after">
+                    <field name="packaging_ok"
+                        attrs="{'invisible':[('type','=','service')]}" />
+                    <label for="packaging_ok"
+                        attrs="{'invisible':[('type','=','service')]}" />
+                </label>
+            </field>
+        </record>
+
+        <record id="view_product_ul_product_form" model="ir.ui.view">
+            <field name="name">product.ul.form.product</field>
+            <field name="model">product.ul</field>
+            <field name="inherit_id" ref="product.product_ul_form_view"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="product_id" 
+                        domain="[('packaging_ok', '=', True)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_product_ul_product_tree" model="ir.ui.view">
+            <field name="name">product.ul.tree.product</field>
+            <field name="model">product.ul</field>
+            <field name="inherit_id" ref="product.product_ul_tree"/>
+            <field name="arch" type="xml">
+                <field name="type" position="after">
+                    <field name="product_id"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
