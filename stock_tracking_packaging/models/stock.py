@@ -36,6 +36,7 @@ class StockMove(orm.Model):
 
     _columns = {
         'content_move_id': fields.many2one('stock.move', 'Content move'),
+        'packaging_move_id': fields.many2one('stock.move', 'Packaging move'),
     }
 
 
@@ -71,6 +72,8 @@ class StockPicking(orm.Model):
                         'date': move.date,
                         'state': 'done'
                     }
-                    move_pool.create(cr, uid, pack_move_data)
+                    packaging_move_id = move_pool.create(
+                        cr, uid, pack_move_data)
+                    move.write({'packaging_move_id': packaging_move_id})
                 pass
         return res
